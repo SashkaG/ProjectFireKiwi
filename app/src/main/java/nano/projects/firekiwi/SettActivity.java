@@ -39,6 +39,7 @@ public class SettActivity extends AppCompatActivity {
         card = (EditText)findViewById(R.id.cardNumb);
         mAuth=FirebaseAuth.getInstance();
         fdb=FirebaseDatabase.getInstance();
+
         Button ctl = (Button)findViewById(R.id.button6);
         ctl.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -48,6 +49,8 @@ public class SettActivity extends AppCompatActivity {
             }
         });
         add = (Button)findViewById(R.id.add);
+        add.setVisibility(View.GONE);//card already exist
+        card.setEnabled(false);
         userName=mAuth.getCurrentUser().getDisplayName();
         userPhone=mAuth.getCurrentUser().getPhoneNumber();
         fdb.getReference("users").child(userPhone).child("card").addListenerForSingleValueEvent(new ValueEventListener() {
@@ -63,6 +66,8 @@ public class SettActivity extends AppCompatActivity {
                 }
                 if(cardNumb==null || cardNumb=="")
                 {
+                    add.setVisibility(View.VISIBLE);//card already exist
+                    card.setEnabled(true);
                     add.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
