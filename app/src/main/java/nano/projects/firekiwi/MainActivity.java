@@ -33,13 +33,14 @@ public class MainActivity extends AppCompatActivity {
         String a="";
         try {
            a = mAuth.getCurrentUser().getDisplayName();
+            boolean e = a.equals("");
         }
         catch (NullPointerException e)
         {
             skip = false;
         }
         finally {
-            if(skip& !a.equals("")){
+            if(skip){
                 Intent intent = new Intent(MainActivity.this, SettActivity.class);
                 startActivity(intent);
             }
