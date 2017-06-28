@@ -44,8 +44,13 @@ public class SettActivity extends AppCompatActivity {
         fdb.getReference("users").child(userPhone).child("card").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                if(dataSnapshot.getValue()!= null){
+                try
+                {
                     cardNumb = dataSnapshot.getValue().toString();
+                }
+                catch (NullPointerException e)
+                {
+                    cardNumb=null;
                 }
             }
 
@@ -54,7 +59,7 @@ public class SettActivity extends AppCompatActivity {
 
             }
         });
-        if(cardNumb==null)
+        if(cardNumb==null || cardNumb=="")
         {
             add.setVisibility(View.GONE);//card already exist
             card.setEnabled(false);
