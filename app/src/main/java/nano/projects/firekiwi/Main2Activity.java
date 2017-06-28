@@ -22,7 +22,7 @@ public class Main2Activity extends AppCompatActivity {
 
     FirebaseAuth mAuth;
     FirebaseDatabase fdb;
-    ArrayList chats;
+    ArrayList<String> chats;
     ArrayList contacts;
     ListView chatss;
     @Override
@@ -37,7 +37,10 @@ public class Main2Activity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if(dataSnapshot.getValue()!=null)
                 {
-                    chats = dataSnapshot.getValue(ArrayList.class);
+                    for(DataSnapshot dt2 : dataSnapshot.getChildren())
+                    {
+                        chats.add(dt2.getValue(String.class));
+                    }
                     chatss.setAdapter(new ChatAdapter(Main2Activity.this,chats));
                 }
             }

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -34,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
         String a="";
         try {
            a = mAuth.getCurrentUser().getDisplayName();
+            Log.v("1234",a);
            skip = !a.equals("");
         }
         catch (NullPointerException e)
@@ -67,7 +69,9 @@ public class MainActivity extends AppCompatActivity {
                 UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder().setDisplayName(mName).build();
                 user.updateProfile(profileUpdates);
                 fdb.getReference("users").child(mAuth.getCurrentUser().getPhoneNumber()).child("name").setValue(mName);
-                fdb.getReference("users").child(mAuth.getCurrentUser().getPhoneNumber()).child("chats").setValue(new ArrayList<String>());
+                ArrayList<String> arrayList = new ArrayList<String>();
+                arrayList.add(mAuth.getCurrentUser().getPhoneNumber());
+                fdb.getReference("users").child(mAuth.getCurrentUser().getPhoneNumber()).child("chats").setValue(arrayList);
                 Intent intent = new Intent(MainActivity.this, SettActivity.class);
                 startActivity(intent);
             }
