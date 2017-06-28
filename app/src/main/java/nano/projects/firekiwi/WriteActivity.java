@@ -12,6 +12,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -51,7 +52,8 @@ public class WriteActivity extends AppCompatActivity {
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         if(dataSnapshot.getValue()!=null)
                         {
-                            chats = dataSnapshot.getValue(ArrayList.class);
+                            GenericTypeIndicator<ArrayList<String>> t = new GenericTypeIndicator<ArrayList<String>>(){};
+                            chats = dataSnapshot.getValue(t);
                             chats.add(number);
                             fdb.getReference("users").child(mAuth.getCurrentUser().getPhoneNumber()).child("chats").setValue(chats);
                             fdb.getReference("users").child(number).child("chats").addListenerForSingleValueEvent(new ValueEventListener() {
@@ -59,7 +61,8 @@ public class WriteActivity extends AppCompatActivity {
                                 public void onDataChange(DataSnapshot dataSnapshot) {
                                     if(dataSnapshot.getValue()!=null)
                                     {
-                                        chats = dataSnapshot.getValue(ArrayList.class);
+                                        GenericTypeIndicator<ArrayList<String>> t = new GenericTypeIndicator<ArrayList<String>>(){};
+                                        chats = dataSnapshot.getValue(t);
                                         chats.add(mAuth.getCurrentUser().getPhoneNumber());
                                         fdb.getReference("users").child(number).child("chats").setValue(chats);
                                         Intent intent = new Intent(WriteActivity.this,DialogActivity.class);
