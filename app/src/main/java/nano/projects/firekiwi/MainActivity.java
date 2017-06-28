@@ -30,15 +30,16 @@ public class MainActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         final MaterialEditText name = (MaterialEditText)findViewById(R.id.name);
         final MaterialEditText fullname = (MaterialEditText)findViewById(R.id.fullname);
+        String a="";
         try {
-           String a = mAuth.getCurrentUser().getDisplayName();
+           a = mAuth.getCurrentUser().getDisplayName();
         }
         catch (NullPointerException e)
         {
             skip = false;
         }
         finally {
-            if(skip){
+            if(skip& !a.equals("")){
                 Intent intent = new Intent(MainActivity.this, SettActivity.class);
                 startActivity(intent);
             }

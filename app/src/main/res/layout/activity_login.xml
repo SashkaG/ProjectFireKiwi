@@ -46,6 +46,12 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
+            <Button
+                android:id="@+id/button4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Resend" />
+
             <com.rengwuxian.materialedittext.MaterialEditText
                 android:id="@+id/code"
                 android:layout_width="match_parent"

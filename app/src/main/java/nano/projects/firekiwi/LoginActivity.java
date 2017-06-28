@@ -3,6 +3,7 @@ package nano.projects.firekiwi;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
@@ -72,6 +73,13 @@ public class LoginActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         final MaterialEditText number = (MaterialEditText) findViewById(R.id.phone1);
         Button send = (Button)findViewById(R.id.button2);
+        final Button resend = (Button)findViewById(R.id.button4);
+        resend.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Resend(number.getText().toString());
+            }
+        });
         Button confirm = (Button)findViewById(R.id.button3);
         confirm.setOnClickListener(new OnClickListener() {
             @Override
@@ -153,7 +161,7 @@ public class LoginActivity extends AppCompatActivity {
         // [START start_phone_auth]
         PhoneAuthProvider.getInstance().verifyPhoneNumber(
                 phoneNumber,        // Phone number to verify
-                60,                 // Timeout duration
+                120,                 // Timeout duration
                 TimeUnit.SECONDS,   // Unit of timeout
                 this,               // Activity (for callback binding)
                 mCallbacks);        // OnVerificationStateChangedCallbacks
@@ -164,7 +172,7 @@ public class LoginActivity extends AppCompatActivity {
     {
         PhoneAuthProvider.getInstance().verifyPhoneNumber(
                 phoneNumber,        // Phone number to verify
-                60,                 // Timeout duration
+                120,                 // Timeout duration
                 TimeUnit.SECONDS,   // Unit of timeout
                 this,               // Activity (for callback binding)
                 mCallbacks,
@@ -180,6 +188,8 @@ public class LoginActivity extends AppCompatActivity {
                             Log.d(TAG, "signInWithCredential:success");
 
                             FirebaseUser user = task.getResult().getUser();
+                            Intent intent = new Intent(LoginActivity.this,MainActivity.class);
+                            startActivity(intent);
                             // ...
                         } else {
                             // Sign in failed, display a message and update the UI
