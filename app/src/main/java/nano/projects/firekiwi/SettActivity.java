@@ -60,6 +60,8 @@ public class SettActivity extends AppCompatActivity {
                             cardNumb = card.getText().toString();
                             //TODO: register kiwi card
                             fdb.getReference("users").child(userPhone).child("card").setValue(cardNumb);
+                            add.setVisibility(View.GONE);//card already exist
+                            card.setEnabled(false);
                         }
                     });
                 }
