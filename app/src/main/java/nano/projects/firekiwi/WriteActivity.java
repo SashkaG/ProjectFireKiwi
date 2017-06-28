@@ -31,10 +31,11 @@ public class WriteActivity extends AppCompatActivity {
         fdb.getReference("users").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                for(DataSnapshot dataSnapshot2:dataSnapshot.getChildren()){
+                contacts =new ArrayList();
+                for(DataSnapshot dataSnapshot2 : dataSnapshot.getChildren()){
                     contacts.add(dataSnapshot2.getKey());
-                    numbers.setAdapter(new ArrayAdapter(WriteActivity.this,R.layout.support_simple_spinner_dropdown_item,contacts));
                 }
+                numbers.setAdapter(new ArrayAdapter(WriteActivity.this,R.layout.support_simple_spinner_dropdown_item,contacts));
 
             }
 
@@ -54,6 +55,12 @@ public class WriteActivity extends AppCompatActivity {
                         {
                             GenericTypeIndicator<ArrayList<String>> t = new GenericTypeIndicator<ArrayList<String>>(){};
                             chats = dataSnapshot.getValue(t);
+                            if(chats.contains(number))
+                            {
+                                Intent intent = new Intent(WriteActivity.this,DialogActivity.class);
+                                startActivity(intent);
+                                return;
+                            }
                             chats.add(number);
                             fdb.getReference("users").child(mAuth.getCurrentUser().getPhoneNumber()).child("chats").setValue(chats);
                             fdb.getReference("users").child(number).child("chats").addListenerForSingleValueEvent(new ValueEventListener() {
