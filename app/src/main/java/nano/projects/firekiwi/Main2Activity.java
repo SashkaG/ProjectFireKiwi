@@ -1,5 +1,6 @@
 package nano.projects.firekiwi;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -22,6 +23,7 @@ public class Main2Activity extends AppCompatActivity {
     FirebaseAuth mAuth;
     FirebaseDatabase fdb;
     ArrayList chats;
+    ArrayList contacts;
     ListView chatss;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,24 +47,28 @@ public class Main2Activity extends AppCompatActivity {
 
             }
         });
-        fdb.getReference("users").addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for(DataSnapshot dataSnapshot2:dataSnapshot.getChildren()){
-                    Log.v("123",dataSnapshot2.getValue().toString());
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                contacts = new ArrayList<String>();
+                final WriteActivity act = new WriteActivity();
+                fdb.getReference("users").addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        for(DataSnapshot dataSnapshot2:dataSnapshot.getChildren()){
+                            contacts.add(dataSnapshot2.getKey());
+                        }
+                        act.contacts=contacts;
+                        Intent intent = new Intent(Main2Activity.this,act.getClass());
+                        startActivity(intent);
+                    }
 
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
             }
         });
     }

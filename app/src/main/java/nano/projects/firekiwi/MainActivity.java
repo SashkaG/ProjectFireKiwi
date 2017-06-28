@@ -13,6 +13,7 @@ import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.FirebaseDatabase;
 import com.rengwuxian.materialedittext.MaterialEditText;
 
+import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicMarkableReference;
 
 import static nano.projects.firekiwi.R.id.confirm;
@@ -66,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
                 UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder().setDisplayName(mName).build();
                 user.updateProfile(profileUpdates);
                 fdb.getReference("users").child(mAuth.getCurrentUser().getPhoneNumber()).child("name").setValue(mName);
+                fdb.getReference("users").child(mAuth.getCurrentUser().getPhoneNumber()).child("chats").setValue(new ArrayList<String>());
                 Intent intent = new Intent(MainActivity.this, SettActivity.class);
                 startActivity(intent);
             }

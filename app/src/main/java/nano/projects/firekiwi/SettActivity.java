@@ -80,7 +80,8 @@ public class SettActivity extends AppCompatActivity {
                     });
                 }
                 else {
-                    add.setVisibility(View.GONE);//card already exist
+                    add.setVisibility(View.GONE);
+                    card.setText(cardNumb);//card already exist
                     card.setEnabled(false);
                 }
             }
