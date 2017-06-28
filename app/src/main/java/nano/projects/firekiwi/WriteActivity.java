@@ -27,7 +27,21 @@ public class WriteActivity extends AppCompatActivity {
         final FirebaseDatabase fdb = FirebaseDatabase.getInstance();
         final Spinner numbers = (Spinner)findViewById(R.id.spinner);
         Button write = (Button)findViewById(R.id.button5);
-        numbers.setAdapter(new ArrayAdapter(this,R.layout.support_simple_spinner_dropdown_item,contacts));
+        fdb.getReference("users").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for(DataSnapshot dataSnapshot2:dataSnapshot.getChildren()){
+                    contacts.add(dataSnapshot2.getKey());
+                    numbers.setAdapter(new ArrayAdapter(WriteActivity.this,R.layout.support_simple_spinner_dropdown_item,contacts));
+                }
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
         write.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

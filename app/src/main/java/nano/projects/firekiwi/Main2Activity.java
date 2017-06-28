@@ -53,22 +53,8 @@ public class Main2Activity extends AppCompatActivity {
             public void onClick(View view) {
                 contacts = new ArrayList<String>();
                 final WriteActivity act = new WriteActivity();
-                fdb.getReference("users").addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        for(DataSnapshot dataSnapshot2:dataSnapshot.getChildren()){
-                            contacts.add(dataSnapshot2.getKey());
-                        }
-                        act.contacts=contacts;
-                        Intent intent = new Intent(Main2Activity.this,act.getClass());
-                        startActivity(intent);
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-
-                    }
-                });
+                Intent intent = new Intent(Main2Activity.this,act.getClass());
+                startActivity(intent);
             }
         });
     }

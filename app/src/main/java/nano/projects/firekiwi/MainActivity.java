@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
         String a="";
         try {
            a = mAuth.getCurrentUser().getDisplayName();
-            boolean e = a.equals("");
+           skip = !a.equals("");
         }
         catch (NullPointerException e)
         {
