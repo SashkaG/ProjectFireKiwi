@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "966064410853",
+    "firebase_url": "https://firekiwi-2ffed.firebaseio.com",
+    "project_id": "firekiwi-2ffed",
+    "storage_bucket": "firekiwi-2ffed.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:966064410853:android:ff612af95d944893",
+        "android_client_info": {
+          "package_name": "nano.projects.firekiwi"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "966064410853-ltv0d8caos7pi2e17ajrv4epnrspumbh.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "nano.projects.firekiwi",
+            "certificate_hash": "33e14e98efbc92b2d5e479e777cfb5c8c5d109e1"
+          }
+        },
+        {
+          "client_id": "966064410853-4ubuh3rdgbjgu6t53ukta9map67t2ekl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAWUNJARhraLTlEKCXyQIgPLYry9ADbpn4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "966064410853-4ubuh3rdgbjgu6t53ukta9map67t2ekl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
