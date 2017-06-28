@@ -54,10 +54,6 @@ public class SettActivity extends AppCompatActivity {
                 }
                 if(cardNumb==null || cardNumb=="")
                 {
-                    add.setVisibility(View.GONE);//card already exist
-                    card.setEnabled(false);
-                }
-                else {
                     add.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
@@ -66,6 +62,10 @@ public class SettActivity extends AppCompatActivity {
                             fdb.getReference("users").child(userPhone).child("card").setValue(cardNumb);
                         }
                     });
+                }
+                else {
+                    add.setVisibility(View.GONE);//card already exist
+                    card.setEnabled(false);
                 }
             }
 
