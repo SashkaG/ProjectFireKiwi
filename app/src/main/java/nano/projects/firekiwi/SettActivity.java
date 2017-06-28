@@ -1,5 +1,6 @@
 package nano.projects.firekiwi;
 
+import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -38,6 +39,14 @@ public class SettActivity extends AppCompatActivity {
         card = (EditText)findViewById(R.id.cardNumb);
         mAuth=FirebaseAuth.getInstance();
         fdb=FirebaseDatabase.getInstance();
+        Button ctl = (Button)findViewById(R.id.button6);
+        ctl.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SettActivity.this,Main2Activity.class);
+                startActivity(intent);
+            }
+        });
         add = (Button)findViewById(R.id.add);
         userName=mAuth.getCurrentUser().getDisplayName();
         userPhone=mAuth.getCurrentUser().getPhoneNumber();
