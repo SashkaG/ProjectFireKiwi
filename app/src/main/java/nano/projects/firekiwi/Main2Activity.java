@@ -36,9 +36,9 @@ public class Main2Activity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         fdb = FirebaseDatabase.getInstance();
         chatss = (ListView)findViewById(R.id.chatlist);
-        chatss.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        chatss.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String user2 = (String) chatss.getItemAtPosition(position);
                 String user = mAuth.getCurrentUser().getPhoneNumber();
                 String[] e = new String[]{user,user2};
@@ -50,11 +50,6 @@ public class Main2Activity extends AppCompatActivity {
                 intent.putExtra("name2",name2);
                 intent.putExtra("user2",user2);
                 startActivity(intent);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
             }
         });
         fdb.getReference("users").child(mAuth.getCurrentUser().getPhoneNumber()).child("chats").addListenerForSingleValueEvent(new ValueEventListener() {

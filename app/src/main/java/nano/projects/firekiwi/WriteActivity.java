@@ -59,8 +59,27 @@ public class WriteActivity extends AppCompatActivity {
                             chats = dataSnapshot.getValue(t);
                             if(chats.contains(number))
                             {
-                                Intent intent = new Intent(WriteActivity.this,DialogActivity.class);
-                                startActivity(intent);
+                                final String user2 = number;
+                                String user = mAuth.getCurrentUser().getPhoneNumber();
+                                String[] e = new String[]{user,user2};
+                                Arrays.sort(e);
+                                final String chat =e[0]+"_"+e[1];
+                                fdb.getReference("users").child(number).child("name").addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(DataSnapshot dataSnapshot) {
+                                        String name2 = dataSnapshot.getValue(String.class);
+                                        Intent intent = new Intent(WriteActivity.this,DialogActivity.class);
+                                        intent.putExtra("chat",chat);
+                                        intent.putExtra("name2",name2);
+                                        intent.putExtra("user2",user2);
+                                        startActivity(intent);
+                                    }
+
+                                    @Override
+                                    public void onCancelled(DatabaseError databaseError) {
+
+                                    }
+                                });
                                 return;
                             }
                             chats.add(number);
