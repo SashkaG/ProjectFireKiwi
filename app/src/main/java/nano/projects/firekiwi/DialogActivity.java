@@ -48,7 +48,7 @@ public class DialogActivity extends AppCompatActivity {
         name2 = intent.getStringExtra("name2");
         user2 = intent.getStringExtra("user2");
         chat = intent.getStringExtra("chat");// p_id == chat
-        fromto = chat.split("_")[0].equals(name);
+        fromto = chat.split("_")[0].equals(user);
         Log.w("1234",chat.split("_")[0]);
         messages = (ListView)findViewById(R.id.messages);
         Button sendmess = (Button)findViewById(R.id.sendmess);
