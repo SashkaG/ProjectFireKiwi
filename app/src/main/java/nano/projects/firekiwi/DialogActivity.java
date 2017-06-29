@@ -7,6 +7,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.format.DateFormat;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -48,6 +49,7 @@ public class DialogActivity extends AppCompatActivity {
         user2 = intent.getStringExtra("user2");
         chat = intent.getStringExtra("chat");// p_id == chat
         fromto = chat.split("_")[0].equals(name);
+        Log.w("1234",chat.split("_")[0]);
         messages = (ListView)findViewById(R.id.messages);
         Button sendmess = (Button)findViewById(R.id.sendmess);
         final EditText text = (EditText)findViewById(R.id.editText);
@@ -81,7 +83,7 @@ public class DialogActivity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 long m_id = dataSnapshot.getValue(long.class);
-                ChatMessage nm = new ChatMessage(p_id.concat(""+m_id),p_fromTo,p_data,p_type);
+                ChatMessage nm = new ChatMessage(p_id.concat("_"+m_id),p_fromTo,p_data,p_type);
                 fdb.getReference("chats").child(chat).child("m_id").setValue(m_id+1);
                 fdb.getReference("chats").child(chat).child("messages").push().setValue(nm);
             }
