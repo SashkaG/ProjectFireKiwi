@@ -74,7 +74,7 @@ public class DialogActivity extends AppCompatActivity {
                 // Get references to the views of message.xml
             }
         };
-
+        messages.setAdapter(adapter);
     }
     public void sendMessage(final String p_id, final boolean p_fromTo, final Map<String,String> p_data, final String p_type){
         fdb.getReference("chats").child(chat).child("m_id").addListenerForSingleValueEvent(new ValueEventListener() {

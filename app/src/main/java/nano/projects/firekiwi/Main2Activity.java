@@ -60,6 +60,7 @@ public class Main2Activity extends AppCompatActivity {
                     Log.v("1234",dataSnapshot.getValue().toString());
                     GenericTypeIndicator<ArrayList<String>> t = new GenericTypeIndicator<ArrayList<String>>(){};
                     ArrayList<String> chats = dataSnapshot.getValue(t);
+                    chats.remove(mAuth.getCurrentUser().getDisplayName());
                     chatss.setAdapter(new ChatAdapter(Main2Activity.this,chats));
                 }
             }
