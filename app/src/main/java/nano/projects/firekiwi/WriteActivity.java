@@ -79,6 +79,10 @@ public class WriteActivity extends AppCompatActivity {
                                         String[] e = new String[]{user,user2};
                                         Arrays.sort(e);
                                         final String chat =e[0]+"_"+e[1];
+                                        fdb.getReference("chats").child(chat).child("user1").setValue(user);
+                                        fdb.getReference("chats").child(chat).child("user2").setValue(user2);
+                                        fdb.getReference("chats").child(chat).child("balance").setValue(0.00);
+                                        fdb.getReference("chats").child(chat).child("m_id").setValue(0);
                                         fdb.getReference("users").child(number).child("name").addListenerForSingleValueEvent(new ValueEventListener() {
                                             @Override
                                             public void onDataChange(DataSnapshot dataSnapshot) {
