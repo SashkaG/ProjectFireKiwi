@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -16,6 +17,7 @@ import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class WriteActivity extends AppCompatActivity {
     public ArrayList contacts;
@@ -72,8 +74,27 @@ public class WriteActivity extends AppCompatActivity {
                                         chats = dataSnapshot.getValue(t);
                                         chats.add(mAuth.getCurrentUser().getPhoneNumber());
                                         fdb.getReference("users").child(number).child("chats").setValue(chats);
-                                        Intent intent = new Intent(WriteActivity.this,DialogActivity.class);
-                                        startActivity(intent);
+                                        final String user2 = number;
+                                        String user = mAuth.getCurrentUser().getPhoneNumber();
+                                        String[] e = new String[]{user,user2};
+                                        Arrays.sort(e);
+                                        final String chat =e[0]+"_"+e[1];
+                                        fdb.getReference("users").child(number).child("name").addListenerForSingleValueEvent(new ValueEventListener() {
+                                            @Override
+                                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                                String name2 = dataSnapshot.getValue(String.class);
+                                                Intent intent = new Intent(WriteActivity.this,DialogActivity.class);
+                                                intent.putExtra("chat",chat);
+                                                intent.putExtra("name2",name2);
+                                                intent.putExtra("user2",user2);
+                                                startActivity(intent);
+                                            }
+
+                                            @Override
+                                            public void onCancelled(DatabaseError databaseError) {
+
+                                            }
+                                        });
                                     }
                                 }
                                 @Override

@@ -11,17 +11,14 @@ import java.util.Date;
 @IgnoreExtraProperties
 public class ChatMessage {
 
-    public String messageText;
-    public String messageUser;
-    public long messageTime;
-    public String email;
+    public String id;
     public String type;
-    public String reciever;
-    public ChatMessage(String messageTexts, String messageUsers, String emails, String recievers,String types) {
+    public String sender;//user1 or user2
+    public ChatMessage(String messageTexts, String messageUsers, String senders, String recievers,String types) {
         this.messageText = messageTexts;
         this.messageUser = messageUsers;
         this.messageTime = new Date().getTime();
-        this.email=emails;
+        this.sender=senders;
         this.reciever = recievers;
         this.type=types;
     }
