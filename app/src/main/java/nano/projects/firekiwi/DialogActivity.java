@@ -59,7 +59,7 @@ public class DialogActivity extends AppCompatActivity {
                 sendMessage(chat,fromto,a,"simple");
             }
         });
-        adapter = new FirebaseListAdapter<ChatMessage>(this, ChatMessage.class, R.layout.message, fdb.getReference("chats").child("messages")) {
+        adapter = new FirebaseListAdapter<ChatMessage>(this, ChatMessage.class, R.layout.message, fdb.getReference("chats").child(chat).child("messages")) {
             @Override
             protected void populateView(View v, ChatMessage model, int position) {
                 if(model.type=="simple")
